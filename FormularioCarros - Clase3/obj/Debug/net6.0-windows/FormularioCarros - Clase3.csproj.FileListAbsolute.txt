@@ -1,0 +1,22 @@
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\bin\Debug\net6.0-windows\FormularioCarros - Clase3.exe
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\bin\Debug\net6.0-windows\FormularioCarros - Clase3.deps.json
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\bin\Debug\net6.0-windows\FormularioCarros - Clase3.runtimeconfig.json
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\bin\Debug\net6.0-windows\FormularioCarros - Clase3.dll
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\bin\Debug\net6.0-windows\ref\FormularioCarros - Clase3.dll
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\bin\Debug\net6.0-windows\FormularioCarros - Clase3.pdb
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros - Clase3.csproj.AssemblyReference.cache
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros - Clase3.csproj.GenerateResource.cache
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros - Clase3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros - Clase3.AssemblyInfoInputs.cache
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros - Clase3.AssemblyInfo.cs
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros - Clase3.csproj.CoreCompileInputs.cache
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros - Clase3.dll
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\ref\FormularioCarros - Clase3.dll
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros - Clase3.pdb
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros - Clase3.genruntimeconfig.cache
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros___Clase3.CarForm.resources
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros___Clase3.ColorForm.resources
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros___Clase3.ModelForm.resources
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros - Clase3.csproj.CopyComplete
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros___Clase3.Properties.Resources.resources
