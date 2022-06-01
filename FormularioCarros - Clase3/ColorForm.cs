@@ -120,6 +120,62 @@ namespace FormularioCarros___Clase3
             ReadJson();
         }
 
+        private void dgDatosColor_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                dgDatosColor.Rows[e.RowIndex].Selected = true;
+                var rI = e.RowIndex;
+                dgDatosColor.CurrentCell = dgDatosColor.Rows[e.RowIndex].Cells[1];
+                contextMenuStrip1.Show(dgDatosColor, e.Location);
+                contextMenuStrip1.Show(Cursor.Position);
+            }
+        }
 
+        private void borrarFilaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("¿Estas seguro que quieres eliminar el registro seleccionado?","Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.Yes)
+            {
+                var colorList = new List<Modelos.Color>();
+
+                if (File.Exists($"{ AppDomain.CurrentDomain.BaseDirectory}\\colors.json"))
+                {
+                    var colorsInJson = File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}\\colors.json", Encoding.UTF8);
+                    colorList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Color>>(colorsInJson);
+
+                    var Id = Convert.ToInt32(dgDatosColor.CurrentRow.Cells["Id"].Value);
+                    var color = colorList.FirstOrDefault(x => x.Id == Id);
+                    if (color != null)
+                    {
+                        colorList.Remove(color);
+
+                        //Convert List to Json Object
+                        var json = Newtonsoft.Json.JsonConvert.SerializeObject(colorList);
+
+                        //Write Json File
+                        StreamWriter sw = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}\\colors.json", false, Encoding.UTF8);
+                        sw.WriteLine(json);
+                        sw.Close();
+
+                        ReadJson();
+                    }
+                }
+            }
+        }
+
+        private void actualizarRegistroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgDatosColor.SelectedRows.Count != 0)
+            {
+                txtId.Text = dgDatosColor.CurrentRow.Cells["Id"].Value.ToString();
+                txtNombre.Text = dgDatosColor.CurrentRow.Cells["Name"].Value.ToString();
+                chkVisible.Checked = (bool)dgDatosColor.CurrentRow.Cells["Visible"].Value;
+                Adding = false;
+
+            }
+            
+
+        }
     }
 }

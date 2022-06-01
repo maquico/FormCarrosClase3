@@ -56,7 +56,8 @@ namespace FormularioCarros___Clase3
 
         private void btnMarcaForm_Click(object sender, EventArgs e)
         {
-
+            var frm = new MarcaForm();
+            frm.Show();
         }
 
         private void GetColors()

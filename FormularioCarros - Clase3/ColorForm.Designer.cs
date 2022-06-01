@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblNombreColor = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
@@ -37,7 +38,11 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.dgDatosColor = new System.Windows.Forms.DataGridView();
             this.chkVisible = new System.Windows.Forms.CheckBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.borrarFilaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actualizarRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgDatosColor)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblNombreColor
@@ -113,6 +118,7 @@
             this.dgDatosColor.RowTemplate.Height = 25;
             this.dgDatosColor.Size = new System.Drawing.Size(497, 324);
             this.dgDatosColor.TabIndex = 34;
+            this.dgDatosColor.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgDatosColor_CellMouseUp);
             // 
             // chkVisible
             // 
@@ -123,6 +129,28 @@
             this.chkVisible.TabIndex = 35;
             this.chkVisible.Text = "Visible al publico";
             this.chkVisible.UseVisualStyleBackColor = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.borrarFilaToolStripMenuItem,
+            this.actualizarRegistroToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            // 
+            // borrarFilaToolStripMenuItem
+            // 
+            this.borrarFilaToolStripMenuItem.Name = "borrarFilaToolStripMenuItem";
+            this.borrarFilaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.borrarFilaToolStripMenuItem.Text = "Borrar Registro";
+            this.borrarFilaToolStripMenuItem.Click += new System.EventHandler(this.borrarFilaToolStripMenuItem_Click);
+            // 
+            // actualizarRegistroToolStripMenuItem
+            // 
+            this.actualizarRegistroToolStripMenuItem.Name = "actualizarRegistroToolStripMenuItem";
+            this.actualizarRegistroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.actualizarRegistroToolStripMenuItem.Text = "Actualizar Registro";
+            this.actualizarRegistroToolStripMenuItem.Click += new System.EventHandler(this.actualizarRegistroToolStripMenuItem_Click);
             // 
             // ColorForm
             // 
@@ -144,6 +172,7 @@
             this.Name = "ColorForm";
             this.Text = "ColorForm";
             ((System.ComponentModel.ISupportInitialize)(this.dgDatosColor)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,5 +189,8 @@
         private Button btnGuardar;
         private DataGridView dgDatosColor;
         private CheckBox chkVisible;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem borrarFilaToolStripMenuItem;
+        private ToolStripMenuItem actualizarRegistroToolStripMenuItem;
     }
 }

@@ -20,3 +20,4 @@ C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\De
 C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
 C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros - Clase3.csproj.CopyComplete
 C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros___Clase3.Properties.Resources.resources
+C:\Users\Angel\source\repos\Desarrollo2Solucion\FormularioCarros - Clase3\obj\Debug\net6.0-windows\FormularioCarros___Clase3.MarcaForm.resources
