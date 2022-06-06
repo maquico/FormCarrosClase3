@@ -54,6 +54,9 @@
             this.dgDatosVehiculos = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblMsg = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnTipoForm = new System.Windows.Forms.Button();
+            this.cbTipo = new System.Windows.Forms.ComboBox();
+            this.lblTipo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbFotoCarro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgDatosVehiculos)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -63,7 +66,7 @@
             // 
             this.btnGuardar.BackColor = System.Drawing.Color.LawnGreen;
             this.btnGuardar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnGuardar.Location = new System.Drawing.Point(120, 563);
+            this.btnGuardar.Location = new System.Drawing.Point(120, 586);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(108, 34);
             this.btnGuardar.TabIndex = 0;
@@ -74,7 +77,7 @@
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.Red;
-            this.btnCancelar.Location = new System.Drawing.Point(285, 563);
+            this.btnCancelar.Location = new System.Drawing.Point(285, 586);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(107, 34);
             this.btnCancelar.TabIndex = 1;
@@ -87,7 +90,7 @@
             this.pbFotoCarro.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pbFotoCarro.Location = new System.Drawing.Point(273, 77);
             this.pbFotoCarro.Name = "pbFotoCarro";
-            this.pbFotoCarro.Size = new System.Drawing.Size(238, 247);
+            this.pbFotoCarro.Size = new System.Drawing.Size(250, 272);
             this.pbFotoCarro.TabIndex = 2;
             this.pbFotoCarro.TabStop = false;
             // 
@@ -95,13 +98,13 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(95, 160);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 23);
+            this.textBox1.Size = new System.Drawing.Size(154, 23);
             this.textBox1.TabIndex = 3;
             // 
             // cbColor
             // 
             this.cbColor.FormattingEnabled = true;
-            this.cbColor.Location = new System.Drawing.Point(95, 251);
+            this.cbColor.Location = new System.Drawing.Point(95, 351);
             this.cbColor.Name = "cbColor";
             this.cbColor.Size = new System.Drawing.Size(121, 23);
             this.cbColor.TabIndex = 4;
@@ -111,14 +114,14 @@
             // 
             this.textBox5.Location = new System.Drawing.Point(95, 118);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(121, 23);
+            this.textBox5.Size = new System.Drawing.Size(154, 23);
             this.textBox5.TabIndex = 8;
             // 
             // textBox6
             // 
             this.textBox6.Location = new System.Drawing.Point(95, 75);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(121, 23);
+            this.textBox6.Size = new System.Drawing.Size(154, 23);
             this.textBox6.TabIndex = 9;
             // 
             // lblTitulo
@@ -133,7 +136,7 @@
             // lblMarca
             // 
             this.lblMarca.AutoSize = true;
-            this.lblMarca.Location = new System.Drawing.Point(30, 212);
+            this.lblMarca.Location = new System.Drawing.Point(25, 252);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(40, 15);
             this.lblMarca.TabIndex = 11;
@@ -152,7 +155,7 @@
             // lblColor
             // 
             this.lblColor.AutoSize = true;
-            this.lblColor.Location = new System.Drawing.Point(30, 254);
+            this.lblColor.Location = new System.Drawing.Point(30, 355);
             this.lblColor.Name = "lblColor";
             this.lblColor.Size = new System.Drawing.Size(36, 15);
             this.lblColor.TabIndex = 13;
@@ -170,7 +173,7 @@
             // lblModelo
             // 
             this.lblModelo.AutoSize = true;
-            this.lblModelo.Location = new System.Drawing.Point(30, 300);
+            this.lblModelo.Location = new System.Drawing.Point(25, 305);
             this.lblModelo.Name = "lblModelo";
             this.lblModelo.Size = new System.Drawing.Size(48, 15);
             this.lblModelo.TabIndex = 15;
@@ -188,18 +191,20 @@
             // cbModelo
             // 
             this.cbModelo.FormattingEnabled = true;
-            this.cbModelo.Location = new System.Drawing.Point(95, 297);
+            this.cbModelo.Location = new System.Drawing.Point(95, 301);
             this.cbModelo.Name = "cbModelo";
             this.cbModelo.Size = new System.Drawing.Size(121, 23);
             this.cbModelo.TabIndex = 17;
+            this.cbModelo.SelectedIndexChanged += new System.EventHandler(this.cbModelo_SelectedIndexChanged);
             // 
             // cbMarca
             // 
             this.cbMarca.FormattingEnabled = true;
-            this.cbMarca.Location = new System.Drawing.Point(95, 209);
+            this.cbMarca.Location = new System.Drawing.Point(95, 252);
             this.cbMarca.Name = "cbMarca";
             this.cbMarca.Size = new System.Drawing.Size(121, 23);
             this.cbMarca.TabIndex = 18;
+            this.cbMarca.SelectedIndexChanged += new System.EventHandler(this.cbMarca_SelectedIndexChanged);
             // 
             // lblFoto
             // 
@@ -213,7 +218,7 @@
             // lblDesc
             // 
             this.lblDesc.AutoSize = true;
-            this.lblDesc.Location = new System.Drawing.Point(49, 365);
+            this.lblDesc.Location = new System.Drawing.Point(49, 404);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.Size = new System.Drawing.Size(69, 15);
             this.lblDesc.TabIndex = 20;
@@ -221,7 +226,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(49, 390);
+            this.richTextBox1.Location = new System.Drawing.Point(49, 422);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(431, 131);
             this.richTextBox1.TabIndex = 21;
@@ -229,7 +234,7 @@
             // 
             // btnSubirFoto
             // 
-            this.btnSubirFoto.Location = new System.Drawing.Point(318, 330);
+            this.btnSubirFoto.Location = new System.Drawing.Point(321, 355);
             this.btnSubirFoto.Name = "btnSubirFoto";
             this.btnSubirFoto.Size = new System.Drawing.Size(149, 23);
             this.btnSubirFoto.TabIndex = 22;
@@ -239,7 +244,7 @@
             // 
             // btnColorForm
             // 
-            this.btnColorForm.Location = new System.Drawing.Point(222, 250);
+            this.btnColorForm.Location = new System.Drawing.Point(222, 351);
             this.btnColorForm.Name = "btnColorForm";
             this.btnColorForm.Size = new System.Drawing.Size(27, 23);
             this.btnColorForm.TabIndex = 23;
@@ -249,7 +254,7 @@
             // 
             // btnMarcaForm
             // 
-            this.btnMarcaForm.Location = new System.Drawing.Point(222, 209);
+            this.btnMarcaForm.Location = new System.Drawing.Point(222, 252);
             this.btnMarcaForm.Name = "btnMarcaForm";
             this.btnMarcaForm.Size = new System.Drawing.Size(27, 23);
             this.btnMarcaForm.TabIndex = 24;
@@ -259,7 +264,7 @@
             // 
             // btnModelForm
             // 
-            this.btnModelForm.Location = new System.Drawing.Point(222, 297);
+            this.btnModelForm.Location = new System.Drawing.Point(222, 300);
             this.btnModelForm.Name = "btnModelForm";
             this.btnModelForm.Size = new System.Drawing.Size(27, 23);
             this.btnModelForm.TabIndex = 25;
@@ -273,7 +278,7 @@
             this.dgDatosVehiculos.Location = new System.Drawing.Point(546, 32);
             this.dgDatosVehiculos.Name = "dgDatosVehiculos";
             this.dgDatosVehiculos.RowTemplate.Height = 25;
-            this.dgDatosVehiculos.Size = new System.Drawing.Size(642, 565);
+            this.dgDatosVehiculos.Size = new System.Drawing.Size(642, 610);
             this.dgDatosVehiculos.TabIndex = 26;
             // 
             // statusStrip1
@@ -292,11 +297,42 @@
             this.lblMsg.Size = new System.Drawing.Size(118, 17);
             this.lblMsg.Text = "toolStripStatusLabel1";
             // 
+            // btnTipoForm
+            // 
+            this.btnTipoForm.Location = new System.Drawing.Point(222, 206);
+            this.btnTipoForm.Name = "btnTipoForm";
+            this.btnTipoForm.Size = new System.Drawing.Size(27, 23);
+            this.btnTipoForm.TabIndex = 30;
+            this.btnTipoForm.Text = "...";
+            this.btnTipoForm.UseVisualStyleBackColor = true;
+            this.btnTipoForm.Click += new System.EventHandler(this.btnTipoForm_Click);
+            // 
+            // cbTipo
+            // 
+            this.cbTipo.FormattingEnabled = true;
+            this.cbTipo.Location = new System.Drawing.Point(95, 207);
+            this.cbTipo.Name = "cbTipo";
+            this.cbTipo.Size = new System.Drawing.Size(121, 23);
+            this.cbTipo.TabIndex = 29;
+            this.cbTipo.SelectedIndexChanged += new System.EventHandler(this.cbTipo_SelectedIndexChanged);
+            // 
+            // lblTipo
+            // 
+            this.lblTipo.AutoSize = true;
+            this.lblTipo.Location = new System.Drawing.Point(30, 210);
+            this.lblTipo.Name = "lblTipo";
+            this.lblTipo.Size = new System.Drawing.Size(30, 15);
+            this.lblTipo.TabIndex = 28;
+            this.lblTipo.Text = "Tipo\n";
+            // 
             // CarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 667);
+            this.Controls.Add(this.btnTipoForm);
+            this.Controls.Add(this.cbTipo);
+            this.Controls.Add(this.lblTipo);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgDatosVehiculos);
             this.Controls.Add(this.btnModelForm);
@@ -361,5 +397,8 @@
         private DataGridView dgDatosVehiculos;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel lblMsg;
+        private Button btnTipoForm;
+        private ComboBox cbTipo;
+        private Label lblTipo;
     }
 }

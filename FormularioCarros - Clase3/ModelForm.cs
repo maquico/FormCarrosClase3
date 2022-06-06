@@ -13,10 +13,13 @@ namespace FormularioCarros___Clase3
     public partial class ModelForm : Form
     {
         public bool Adding { get; set; } = true;
+        public string marcaDelModelo { get; set; }
+        public string tipoDelModelo { get; set; }
         public ModelForm()
         {
             InitializeComponent();
-
+            GetTipos();
+            GetMarcas();
             ReadJson();
         }
 
@@ -58,11 +61,16 @@ namespace FormularioCarros___Clase3
                 var modelo = new Modelos.Modelo();
                 if (Adding == true) //Add new Item
                 {
+                    marcaDelModelo = cbMarca.SelectedText;
+                    tipoDelModelo = cbTipo.SelectedText;
                     modelo = new Modelos.Modelo()
                     {
+                        
                         Id = int.Parse(txtId.Text),
                         Name = txtNombre.Text,
                         Visible = chkVisible.Checked,
+                        TipoId = Convert.ToInt32(cbTipo.SelectedValue),
+                        MarcaId = Convert.ToInt32(cbMarca.SelectedValue),
                         CreatedDate = DateTime.Now
                     };
 
@@ -77,6 +85,8 @@ namespace FormularioCarros___Clase3
                         modelo.Name = txtNombre.Text;
                         modelo.Visible = chkVisible.Checked;
                         modelo.ModifiedDate = DateTime.Now;
+                        modelo.TipoId = Convert.ToInt32(cbTipo.SelectedValue);
+                        modelo.MarcaId = Convert.ToInt32(cbMarca.SelectedValue);
                     }
                 }
 
@@ -126,6 +136,88 @@ namespace FormularioCarros___Clase3
         {
             clearFields();
             ReadJson();
+        }
+
+        private void borrarRegistroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("¿Estas seguro que quieres eliminar el registro seleccionado?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.Yes)
+            {
+                var modelosList = new List<Modelos.Modelo>();
+
+                if (File.Exists($"{ AppDomain.CurrentDomain.BaseDirectory}\\modelos.json"))
+                {
+                    var modelosInJson = File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}\\modelos.json", Encoding.UTF8);
+                    modelosList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Modelo>>(modelosInJson);
+
+                    var Id = Convert.ToInt32(dgDatosModelo.CurrentRow.Cells["Id"].Value);
+                    var modelo = modelosList.FirstOrDefault(x => x.Id == Id);
+                    if (modelo != null)
+                    {
+                        modelosList.Remove(modelo);
+
+                        //Convert List to Json Object
+                        var json = Newtonsoft.Json.JsonConvert.SerializeObject(modelosList);
+
+                        //Write Json File
+                        StreamWriter sw = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}\\modelos.json", false, Encoding.UTF8);
+                        sw.WriteLine(json);
+                        sw.Close();
+
+                        ReadJson();
+                    }
+                }
+            }
+        }
+
+        private void actualizarRegistroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgDatosModelo.SelectedRows.Count != 0)
+            {
+                txtId.Text = dgDatosModelo.CurrentRow.Cells["Id"].Value.ToString();
+                txtNombre.Text = dgDatosModelo.CurrentRow.Cells["Name"].Value.ToString();
+                chkVisible.Checked = (bool)dgDatosModelo.CurrentRow.Cells["Visible"].Value;
+                Adding = false;
+
+            }
+        }
+
+        private void GetTipos()
+        {
+            if (File.Exists($"{AppDomain.CurrentDomain.BaseDirectory}\\tipos.json"))
+            {
+                var tiposInJson = File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}\\tipos.json");
+                var tiposList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Tipo>>(tiposInJson);
+                cbTipo.DataSource = tiposList.Where(x => x.Visible).ToList();
+                cbTipo.DisplayMember = "Name";
+                cbTipo.ValueMember = "Id";
+            }
+
+        }
+
+        private void GetMarcas()
+        {
+            if (File.Exists($"{AppDomain.CurrentDomain.BaseDirectory}\\marcas.json"))
+            {
+                var marcasInJson = File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}\\marcas.json", Encoding.UTF8);
+                var marcasList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Marca>>(marcasInJson);
+
+                cbMarca.DataSource = marcasList.Where(x => x.Visible).ToList();
+                cbMarca.DisplayMember = "Name";
+                cbMarca.ValueMember = "Id";
+            }
+        }
+
+        private void dgDatosModelo_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button.Equals(MouseButtons.Right))
+            {
+                dgDatosModelo.Rows[e.RowIndex].Selected = true;
+                var rI = e.RowIndex;
+                dgDatosModelo.CurrentCell = dgDatosModelo.Rows[e.RowIndex].Cells[1];
+                contextMenuStrip1.Show(dgDatosModelo, e.Location);
+                contextMenuStrip1.Show(Cursor.Position);
+            }
         }
     }
 }

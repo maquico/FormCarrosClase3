@@ -22,12 +22,12 @@ namespace FormularioCarros___Clase3
 
         private void ReadJson()
         {
-            var marcasList = new List<Modelos.Modelo>();
+            var marcasList = new List<Modelos.Marca>();
             //Reading Json File
             if (File.Exists($"{AppDomain.CurrentDomain.BaseDirectory}\\marcas.json"))
             {
                 var marcasInJson = File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}\\marcas.json", Encoding.UTF8);
-                marcasList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Modelo>>(marcasInJson);
+                marcasList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Marca>>(marcasInJson);
                 dgDatosMarca.DataSource = marcasList;
 
                 txtId.Text = (marcasList.Count + 1).ToString();
@@ -36,11 +36,6 @@ namespace FormularioCarros___Clase3
             {
                 txtId.Text = "1";
             }
-        }
-
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void SaveJson()
@@ -91,6 +86,7 @@ namespace FormularioCarros___Clase3
                 sw.Close();
 
                 MessageBox.Show("La marca fue creada con exito.");
+   
 
                 //Clear fields
                 clearFields();
@@ -112,21 +108,6 @@ namespace FormularioCarros___Clase3
             chkVisible.Checked = false;
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnGuardar_Click_1(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnCancelar_Click_1(object sender, EventArgs e)
-        {
-            
-        }
-
         private void btnGuardar_Click_2(object sender, EventArgs e)
         {
             SaveJson();
@@ -136,6 +117,61 @@ namespace FormularioCarros___Clase3
         {
             clearFields();
             ReadJson();
+        }
+        private void dgDatosMarca_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                dgDatosMarca.Rows[e.RowIndex].Selected = true;
+                var rI = e.RowIndex;
+                dgDatosMarca.CurrentCell = dgDatosMarca.Rows[e.RowIndex].Cells[1];
+                contextMenuStrip1.Show(dgDatosMarca, e.Location);
+                contextMenuStrip1.Show(Cursor.Position);
+            }
+        }
+
+        private void borrarRegistroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("¿Estas seguro que quieres eliminar el registro seleccionado?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.Yes)
+            {
+                var marcaList = new List<Modelos.Marca>();
+
+                if (File.Exists($"{ AppDomain.CurrentDomain.BaseDirectory}\\marcas.json"))
+                {
+                    var marcasInJson = File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}\\marcas.json", Encoding.UTF8);
+                    marcaList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Marca>>(marcasInJson);
+
+                    var Id = Convert.ToInt32(dgDatosMarca.CurrentRow.Cells["Id"].Value);
+                    var marca = marcaList.FirstOrDefault(x => x.Id == Id);
+                    if (marca != null)
+                    {
+                        marcaList.Remove(marca);
+
+                        //Convert List to Json Object
+                        var json = Newtonsoft.Json.JsonConvert.SerializeObject(marcaList);
+
+                        //Write Json File
+                        StreamWriter sw = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}\\marcas.json", false, Encoding.UTF8);
+                        sw.WriteLine(json);
+                        sw.Close();
+
+                        ReadJson();
+                    }
+                }
+            }
+        }
+
+        private void actualizarRegistroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgDatosMarca.SelectedRows.Count != 0)
+            {
+                txtId.Text = dgDatosMarca.CurrentRow.Cells["Id"].Value.ToString();
+                txtNombre.Text = dgDatosMarca.CurrentRow.Cells["Name"].Value.ToString();
+                chkVisible.Checked = (bool)dgDatosMarca.CurrentRow.Cells["Visible"].Value;
+                Adding = false;
+
+            }
         }
     }
 }

@@ -18,6 +18,8 @@ namespace FormularioCarros___Clase3
             InitializeComponent();
             GetColors();
             GetModels();
+            GetMarcas();
+            GetTipos();
 
             //lblMsg.Text = AppDomain.CurrentDomain.BaseDirectory
         }
@@ -80,7 +82,7 @@ namespace FormularioCarros___Clase3
             if (File.Exists($"{AppDomain.CurrentDomain.BaseDirectory}\\modelos.json"))
             {
                 var modelsInJson = File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}\\modelos.json", Encoding.UTF8);
-                var modelsList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Color>>(modelsInJson);
+                var modelsList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Modelo>>(modelsInJson);
 
                 cbModelo.DataSource = modelsList.Where(x => x.Visible).ToList();
                 cbModelo.DisplayMember = "Name";
@@ -90,6 +92,53 @@ namespace FormularioCarros___Clase3
         private void cbColor_SelectedIndexChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void cbMarca_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void GetMarcas()
+        {
+            if (File.Exists($"{AppDomain.CurrentDomain.BaseDirectory}\\marcas.json"))
+            {
+                var marcasInJson = File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}\\marcas.json", Encoding.UTF8);
+                var marcasList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Marca>>(marcasInJson);
+
+                cbMarca.DataSource = marcasList.Where(x => x.Visible).ToList();
+                cbMarca.DisplayMember = "Name";
+                cbMarca.ValueMember = "Id";
+            }
+        }
+
+        private void btnTipoForm_Click(object sender, EventArgs e)
+        {
+            var frm = new TipoForm();
+            frm.Show();
+        }
+
+        private void GetTipos()
+        {
+            if (File.Exists($"{AppDomain.CurrentDomain.BaseDirectory}\\tipos.json"))
+            {
+                var tiposInJson = File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}\\tipos.json");
+                var tiposList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Tipo>>(tiposInJson);
+                cbTipo.DataSource = tiposList.Where(x => x.Visible).ToList();
+                cbTipo.DisplayMember = "Name";
+                cbTipo.ValueMember = "Id";
+            }
+            
+        }
+
+        private void cbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cbModelo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
