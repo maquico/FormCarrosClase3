@@ -13,9 +13,12 @@ namespace FormularioCarros___Clase3
 {
     public partial class CarForm : Form
     {
+        public bool Adding = true;
         public CarForm()
         {
+            
             InitializeComponent();
+            ReadJson();
             GetColors();
             GetModels();
             GetMarcas();
@@ -31,17 +34,22 @@ namespace FormularioCarros___Clase3
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-
+            SaveJson();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-
+            clearFields();
         }
 
         private void btnSubirFoto_Click(object sender, EventArgs e)
         {
-
+            OpenFileDialog cuadroDialog = new OpenFileDialog();
+            if (cuadroDialog.ShowDialog()==DialogResult.OK)
+            {
+                pbFotoCarro.Image = new Bitmap(cuadroDialog.FileName);
+                txtPicture.Text= cuadroDialog.FileName;
+            }
         }
 
         private void btnColorForm_Click(object sender, EventArgs e)
@@ -139,6 +147,159 @@ namespace FormularioCarros___Clase3
         private void cbModelo_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ReadJson()
+        {
+            var modelsList = new List<Modelos.Modelo>();
+            //Reading Json File
+            if (File.Exists($"{AppDomain.CurrentDomain.BaseDirectory}\\vehiculos.json"))
+            {
+                var modelsInJson = File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}\\vehiculos.json", Encoding.UTF8);
+                modelsList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Modelo>>(modelsInJson);
+                dgDatosVehiculos.DataSource = modelsList;
+
+                txtId.Text = (modelsList.Count + 1).ToString();
+            }
+            else
+            {
+                txtId.Text = "1";
+            }
+        }
+
+        private void SaveJson()
+        {
+            try
+            {
+                var vehicleList = new List<Modelos.Vehicle>();
+
+                if (File.Exists($"{AppDomain.CurrentDomain.BaseDirectory}\\vehiculos.json"))
+                {
+                    var vehiclesInJson = File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}\\vehiculos.json", Encoding.UTF8);
+                    vehicleList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Vehicle>>(vehiclesInJson);
+                }
+
+                var vehiculo = new Modelos.Vehicle();
+                if (Adding == true) //Add new Item
+                {
+                    vehiculo = new Modelos.Vehicle
+                    {
+                        Id = int.Parse(txtId.Text),
+                        ColorId = Convert.ToInt32(cbColor.SelectedValue),
+                        ModeloId = Convert.ToInt32(cbModelo.SelectedValue),
+                        MarcaId = Convert.ToInt32(cbMarca.SelectedValue),
+                        Año = Convert.ToInt32(txtAño.Text),
+                        TipoId = Convert.ToInt32(cbTipo.SelectedValue),
+                        Matricula = txtMatricula.Text,
+                        Descripcion = txtDescripcion.Text,
+                        CreatedDate = DateTime.Now
+                    };
+
+                }
+                else //Update Item
+                {
+                    var Id = Convert.ToInt32(txtId.Text);
+                    vehiculo = vehicleList.FirstOrDefault(x => x.Id == Id);
+                    if (vehiculo != null)
+                    {
+                        vehicleList.Remove(vehiculo);
+                        
+                        vehiculo.ModifiedDate = DateTime.Now;
+                    }
+                }
+
+                //Add item to List
+                vehicleList.Add(vehiculo);
+
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(vehicleList);
+
+                //Saving Json file in Disk
+                var sw = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}\\vehiculos.json", false, Encoding.UTF8);
+                sw.WriteLine(json);
+                sw.Close();
+
+                MessageBox.Show("El vehiculo fue creado con exito.");
+
+                //Clear fields
+                //clearFields();
+
+                //Read Json Method
+                ReadJson();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        private void clearFields()
+        {
+            Adding = true;
+            txtId.Text = string.Empty;
+            txtDescripcion.Text = string.Empty;
+            txtAño.Text = string.Empty;
+            txtMatricula.Text = string.Empty;
+
+        }
+
+        private void borrarRegistroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("¿Estas seguro que quieres eliminar el registro seleccionado?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.Yes)
+            {
+                var vehiclesList = new List<Modelos.Vehicle>();
+
+                if (File.Exists($"{ AppDomain.CurrentDomain.BaseDirectory}\\vehiculos.json"))
+                {
+                    var vehiclesInJson = File.ReadAllText($"{AppDomain.CurrentDomain.BaseDirectory}\\vehiculos.json", Encoding.UTF8);
+                    vehiclesList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Modelos.Vehicle>>(vehiclesInJson);
+
+                    var Id = Convert.ToInt32(dgDatosVehiculos.CurrentRow.Cells["Id"].Value);
+                    var vehiculo = vehiclesList.FirstOrDefault(x => x.Id == Id);
+                    if (vehiculo != null)
+                    {
+                        vehiclesList.Remove(vehiculo);
+
+                        //Convert List to Json Object
+                        var json = Newtonsoft.Json.JsonConvert.SerializeObject(vehiclesList);
+
+                        //Write Json File
+                        StreamWriter sw = new StreamWriter($"{AppDomain.CurrentDomain.BaseDirectory}\\vehiculos.json", false, Encoding.UTF8);
+                        sw.WriteLine(json);
+                        sw.Close();
+
+                        ReadJson();
+                    }
+                }
+            }
+        }
+
+        private void actualizarRegistroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgDatosVehiculos.SelectedRows.Count != 0)
+            {
+                txtId.Text = dgDatosVehiculos.CurrentRow.Cells["Id"].Value.ToString();
+                txtMatricula.Text = dgDatosVehiculos.CurrentRow.Cells["Matricula"].Value.ToString();
+                txtAño.Text = dgDatosVehiculos.CurrentRow.Cells["Año"].Value.ToString();
+                Adding = false;
+
+            }
+        }
+
+        private void dgDatosVehiculos_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                dgDatosVehiculos.Rows[e.RowIndex].Selected = true;
+                var rI = e.RowIndex;
+                dgDatosVehiculos.CurrentCell = dgDatosVehiculos.Rows[e.RowIndex].Cells[1];
+                contextMenuStrip1.Show(dgDatosVehiculos, e.Location);
+                contextMenuStrip1.Show(Cursor.Position);
+            }
+        }
+
+        private void cbColor_Click(object sender, EventArgs e)
+        {
+            GetColors();
         }
     }
 }

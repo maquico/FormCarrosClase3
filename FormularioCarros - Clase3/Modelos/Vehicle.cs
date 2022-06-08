@@ -10,6 +10,8 @@ namespace FormularioCarros___Clase3.Modelos
     {
         public int Id { get; set; }
         public int ColorId { get; set; }
+
+        public int TipoId { get; set; }
         public string Matricula { get; set; }
 
         public int MarcaId { get; set; }
@@ -20,6 +22,8 @@ namespace FormularioCarros___Clase3.Modelos
         public string Descripcion { get; set; }
 
         public DateTime CreatedDate { get; set; }
+
+        public DateTime ModifiedDate { get; set; }
 
 
 

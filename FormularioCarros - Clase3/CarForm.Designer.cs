@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.pbFotoCarro = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtMatricula = new System.Windows.Forms.TextBox();
             this.cbColor = new System.Windows.Forms.ComboBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtAño = new System.Windows.Forms.TextBox();
+            this.txtId = new System.Windows.Forms.TextBox();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.lblMarca = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
@@ -46,7 +47,7 @@
             this.cbMarca = new System.Windows.Forms.ComboBox();
             this.lblFoto = new System.Windows.Forms.Label();
             this.lblDesc = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.txtDescripcion = new System.Windows.Forms.RichTextBox();
             this.btnSubirFoto = new System.Windows.Forms.Button();
             this.btnColorForm = new System.Windows.Forms.Button();
             this.btnMarcaForm = new System.Windows.Forms.Button();
@@ -57,16 +58,21 @@
             this.btnTipoForm = new System.Windows.Forms.Button();
             this.cbTipo = new System.Windows.Forms.ComboBox();
             this.lblTipo = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.borrarRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actualizarRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtPicture = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbFotoCarro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgDatosVehiculos)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGuardar
             // 
             this.btnGuardar.BackColor = System.Drawing.Color.LawnGreen;
             this.btnGuardar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnGuardar.Location = new System.Drawing.Point(120, 586);
+            this.btnGuardar.Location = new System.Drawing.Point(120, 608);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(108, 34);
             this.btnGuardar.TabIndex = 0;
@@ -77,7 +83,7 @@
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.Red;
-            this.btnCancelar.Location = new System.Drawing.Point(285, 586);
+            this.btnCancelar.Location = new System.Drawing.Point(284, 608);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(107, 34);
             this.btnCancelar.TabIndex = 1;
@@ -91,15 +97,16 @@
             this.pbFotoCarro.Location = new System.Drawing.Point(273, 77);
             this.pbFotoCarro.Name = "pbFotoCarro";
             this.pbFotoCarro.Size = new System.Drawing.Size(250, 272);
+            this.pbFotoCarro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbFotoCarro.TabIndex = 2;
             this.pbFotoCarro.TabStop = false;
             // 
-            // textBox1
+            // txtMatricula
             // 
-            this.textBox1.Location = new System.Drawing.Point(95, 160);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(154, 23);
-            this.textBox1.TabIndex = 3;
+            this.txtMatricula.Location = new System.Drawing.Point(95, 160);
+            this.txtMatricula.Name = "txtMatricula";
+            this.txtMatricula.Size = new System.Drawing.Size(154, 23);
+            this.txtMatricula.TabIndex = 3;
             // 
             // cbColor
             // 
@@ -109,20 +116,21 @@
             this.cbColor.Size = new System.Drawing.Size(121, 23);
             this.cbColor.TabIndex = 4;
             this.cbColor.SelectedIndexChanged += new System.EventHandler(this.cbColor_SelectedIndexChanged);
+            this.cbColor.Click += new System.EventHandler(this.cbColor_Click);
             // 
-            // textBox5
+            // txtAño
             // 
-            this.textBox5.Location = new System.Drawing.Point(95, 118);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(154, 23);
-            this.textBox5.TabIndex = 8;
+            this.txtAño.Location = new System.Drawing.Point(95, 118);
+            this.txtAño.Name = "txtAño";
+            this.txtAño.Size = new System.Drawing.Size(154, 23);
+            this.txtAño.TabIndex = 8;
             // 
-            // textBox6
+            // txtId
             // 
-            this.textBox6.Location = new System.Drawing.Point(95, 75);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(154, 23);
-            this.textBox6.TabIndex = 9;
+            this.txtId.Location = new System.Drawing.Point(95, 75);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(154, 23);
+            this.txtId.TabIndex = 9;
             // 
             // lblTitulo
             // 
@@ -218,19 +226,19 @@
             // lblDesc
             // 
             this.lblDesc.AutoSize = true;
-            this.lblDesc.Location = new System.Drawing.Point(49, 404);
+            this.lblDesc.Location = new System.Drawing.Point(49, 440);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.Size = new System.Drawing.Size(69, 15);
             this.lblDesc.TabIndex = 20;
             this.lblDesc.Text = "Descripcion";
             // 
-            // richTextBox1
+            // txtDescripcion
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(49, 422);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(431, 131);
-            this.richTextBox1.TabIndex = 21;
-            this.richTextBox1.Text = "";
+            this.txtDescripcion.Location = new System.Drawing.Point(49, 458);
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(431, 131);
+            this.txtDescripcion.TabIndex = 21;
+            this.txtDescripcion.Text = "";
             // 
             // btnSubirFoto
             // 
@@ -280,6 +288,7 @@
             this.dgDatosVehiculos.RowTemplate.Height = 25;
             this.dgDatosVehiculos.Size = new System.Drawing.Size(642, 610);
             this.dgDatosVehiculos.TabIndex = 26;
+            this.dgDatosVehiculos.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgDatosVehiculos_CellMouseUp);
             // 
             // statusStrip1
             // 
@@ -325,11 +334,42 @@
             this.lblTipo.TabIndex = 28;
             this.lblTipo.Text = "Tipo\n";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.borrarRegistroToolStripMenuItem,
+            this.actualizarRegistroToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 48);
+            // 
+            // borrarRegistroToolStripMenuItem
+            // 
+            this.borrarRegistroToolStripMenuItem.Name = "borrarRegistroToolStripMenuItem";
+            this.borrarRegistroToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.borrarRegistroToolStripMenuItem.Text = "Borrar registro";
+            this.borrarRegistroToolStripMenuItem.Click += new System.EventHandler(this.borrarRegistroToolStripMenuItem_Click);
+            // 
+            // actualizarRegistroToolStripMenuItem
+            // 
+            this.actualizarRegistroToolStripMenuItem.Name = "actualizarRegistroToolStripMenuItem";
+            this.actualizarRegistroToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.actualizarRegistroToolStripMenuItem.Text = "Actualizar registro";
+            this.actualizarRegistroToolStripMenuItem.Click += new System.EventHandler(this.actualizarRegistroToolStripMenuItem_Click);
+            // 
+            // txtPicture
+            // 
+            this.txtPicture.Location = new System.Drawing.Point(349, 395);
+            this.txtPicture.Name = "txtPicture";
+            this.txtPicture.Size = new System.Drawing.Size(100, 23);
+            this.txtPicture.TabIndex = 31;
+            this.txtPicture.Visible = false;
+            // 
             // CarForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 667);
+            this.Controls.Add(this.txtPicture);
             this.Controls.Add(this.btnTipoForm);
             this.Controls.Add(this.cbTipo);
             this.Controls.Add(this.lblTipo);
@@ -339,7 +379,7 @@
             this.Controls.Add(this.btnMarcaForm);
             this.Controls.Add(this.btnColorForm);
             this.Controls.Add(this.btnSubirFoto);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.lblDesc);
             this.Controls.Add(this.lblFoto);
             this.Controls.Add(this.cbMarca);
@@ -351,10 +391,10 @@
             this.Controls.Add(this.lblId);
             this.Controls.Add(this.lblMarca);
             this.Controls.Add(this.lblTitulo);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.txtAño);
             this.Controls.Add(this.cbColor);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtMatricula);
             this.Controls.Add(this.pbFotoCarro);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
@@ -364,6 +404,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgDatosVehiculos)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -374,10 +415,10 @@
         private Button btnGuardar;
         private Button btnCancelar;
         private PictureBox pbFotoCarro;
-        private TextBox textBox1;
+        private TextBox txtMatricula;
         private ComboBox cbColor;
-        private TextBox textBox5;
-        private TextBox textBox6;
+        private TextBox txtAño;
+        private TextBox txtId;
         private Label lblTitulo;
         private Label lblMarca;
         private Label lblId;
@@ -389,7 +430,7 @@
         private ComboBox cbMarca;
         private Label lblFoto;
         private Label lblDesc;
-        private RichTextBox richTextBox1;
+        private RichTextBox txtDescripcion;
         private Button btnSubirFoto;
         private Button btnColorForm;
         private Button btnMarcaForm;
@@ -400,5 +441,9 @@
         private Button btnTipoForm;
         private ComboBox cbTipo;
         private Label lblTipo;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem borrarRegistroToolStripMenuItem;
+        private ToolStripMenuItem actualizarRegistroToolStripMenuItem;
+        private TextBox txtPicture;
     }
 }
